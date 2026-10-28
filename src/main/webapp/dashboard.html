@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Public Safety Monitoring System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1565c0, #42a5f5);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .header p {
+            margin-top: 8px;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 35px auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #1565c0;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 18px;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #1565c0;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0d47a1;
+        }
+
+        .sos-btn {
+            background: #e53935;
+        }
+
+        .sos-btn:hover {
+            background: #b71c1c;
+        }
+
+        .logout {
+            display: block;
+            width: 150px;
+            margin: 30px auto;
+            text-align: center;
+            padding: 10px;
+            background: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .alert {
+            display: none;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 700px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>🛡️ Public Safety Monitoring System</h1>
+    <p>Stay Safe • Stay Connected • Stay Protected</p>
+</div>
+
+<div class="container">
+
+    <div id="alertBox" class="alert"></div>
+
+    <div class="cards">
+
+        <!-- 1. Emergency SOS -->
+        <div class="card">
+            <h2>🚨 Emergency SOS</h2>
+
+            <form id="sosForm">
+
+                <label>Emergency Message</label>
+
+                <textarea
+                    name="message"
+                    rows="4"
+                    placeholder="Enter emergency message..."></textarea>
+
+                <button type="submit" class="sos-btn">
+                    🚨 SEND SOS ALERT
+                </button>
+
+            </form>
+        </div>
+
+
+        <!-- 2. Daily Health Check-in -->
+        <div class="card">
+            <h2>📋 Daily Health Check-in</h2>
+
+            <form id="healthForm">
+
+                <label>Health Status</label>
+
+                <select name="health_status" required>
+                    <option value="">Select Health Status</option>
+                    <option value="Good">😊 Good</option>
+                    <option value="Average">😐 Average</option>
+                    <option value="Poor">😟 Poor</option>
+                    <option value="Emergency">🚨 Emergency</option>
+                </select>
+
+                <label>Notes</label>
+
+                <textarea
+                    name="notes"
+                    rows="4"
+                    placeholder="Enter your health notes..."></textarea>
+
+                <button type="submit">
+                    Submit Health Check-in
+                </button>
+
+            </form>
+        </div>
+
+
+        <!-- 3. Add Medication -->
+        <div class="card">
+            <h2>💊 Add Medication</h2>
+
+            <form id="medicationForm">
+
+                <label>Medicine Name</label>
+
+                <input
+                    type="text"
+                    name="medicine_name"
+                    placeholder="Enter medicine name"
+                    required>
+
+                <label>Dosage</label>
+
+                <input
+                    type="text"
+                    name="dosage"
+                    placeholder="Example: 1 tablet"
+                    required>
+
+                <label>Reminder Time</label>
+
+                <input
+                    type="time"
+                    name="reminder_time"
+                    required>
+
+                <button type="submit">
+                    Add Medication
+                </button>
+
+            </form>
+        </div>
+
+
+        <!-- 4. Emergency Contact -->
+        <div class="card">
+            <h2>📞 Emergency Contact</h2>
+
+            <form id="contactForm">
+
+                <label>Contact Name</label>
+
+                <input
+                    type="text"
+                    name="contact_name"
+                    placeholder="Enter contact name"
+                    required>
+
+                <label>Phone Number</label>
+
+                <input
+                    type="text"
+                    name="phone"
+                    placeholder="Enter phone number"
+                    required>
+
+                <label>Relationship</label>
+
+                <input
+                    type="text"
+                    name="relationship"
+                    placeholder="Example: Father, Mother"
+                    required>
+
+                <button type="submit">
+                    Save Emergency Contact
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+
+    <a href="LogoutServlet" class="logout">
+        Logout
+    </a>
+
+</div>
+
+
+<script>
+
+function showAlert(message, success) {
+
+    const box = document.getElementById("alertBox");
+
+    box.innerText = message;
+
+    box.className = "alert " + (success ? "success" : "error");
+
+    box.style.display = "block";
+
+    setTimeout(function() {
+        box.style.display = "none";
+    }, 3000);
+}
+
+
+function handleFormSubmit(formId, servletUrl, successMessage) {
+
+    document.getElementById(formId).addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const form = this;
+
+        const formData =
+            new URLSearchParams(new FormData(form));
+
+        fetch(servletUrl, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                "application/x-www-form-urlencoded; charset=UTF-8"
+            },
+
+            credentials: "same-origin",
+
+            body: formData
+
+        })
+
+        .then(function(response) {
+
+            if (response.status === 401) {
+
+                showAlert("Please login again.", false);
+
+                setTimeout(function() {
+                    window.location.href = "login.html";
+                }, 1500);
+
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error("Server error: " + response.status);
+            }
+
+            showAlert(successMessage, true);
+
+            form.reset();
+
+        })
+
+        .catch(function(error) {
+
+            console.error(error);
+
+            showAlert(
+                "Error submitting form. Please check server.",
+                false
+            );
+
+        });
+
+    });
+}
+
+
+/* Emergency SOS */
+handleFormSubmit(
+    "sosForm",
+    "SOSServlet",
+    "🚨 SOS alert sent successfully!"
+);
+
+
+/* Health Check-in */
+handleFormSubmit(
+    "healthForm",
+    "HealthCheckinServlet",
+    "📋 Health check-in submitted successfully!"
+);
+
+
+/* Medication */
+handleFormSubmit(
+    "medicationForm",
+    "MedicationServlet",
+    "💊 Medication added successfully!"
+);
+
+
+/* Emergency Contact */
+handleFormSubmit(
+    "contactForm",
+    "EmergencyContactServlet",
+    "📞 Emergency contact saved successfully!"
+);
+
+</script>
+
+</body>
+</html>
